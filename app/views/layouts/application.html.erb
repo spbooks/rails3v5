@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ReaditRails5</title>
+    <title>Readit</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <div id="content">
+      <h1>Readit</h1>
+      <% unless flash[:notice].blank? %>
+        <div id="notification"><%= flash[:notice] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
