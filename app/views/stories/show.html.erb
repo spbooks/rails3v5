@@ -9,9 +9,13 @@
     <em>No votes yet!</em>
   <% else %>
     <%= render partial: 'votes/vote',
-               collection: @story.votes.latest %>
+      collection: @story.votes.latest %>
   <% end %>
 </ul>
+<p class="submitted_by">
+  Submitted by:
+  <span><%= @story.user.name %></span>
+</p>
 <p>
   <%= link_to @story.link, @story.link %>
 </p>

@@ -17,9 +17,9 @@ class StoryTest < ActiveSupport::TestCase
   end
 
   test "is valid with required attributes" do
-    s = Story.create(
-                     name: 'My test submission',
-                     link: 'http://www.testsubmission.com/')
+    s = users(:glenn).stories.create(
+      name: 'My test submission',
+      link: 'http://www.testsubmission.com/')
     assert s.valid?
   end
 
@@ -29,7 +29,11 @@ class StoryTest < ActiveSupport::TestCase
   end
 
   test "return 3 latest votes" do
-    10.times { stories(:one).votes.create }
+    10.times { stories(:one).votes.create(user: users(:glenn)) }
     assert_equal 3, stories(:one).votes.latest.size
+  end
+
+  test "is associated with a user"do
+    assert_equal users(:glenn), stories(:one).user
   end
 end
