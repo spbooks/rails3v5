@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :login_required, only: [ :new, :create ]
+  before_action :ensure_login, only: [ :new, :create ]
   def index
     @story = Story.order('RANDOM()').first
   end
