@@ -1,7 +1,12 @@
 class StoriesController < ApplicationController
   before_action :ensure_login, only: [ :new, :create ]
   def index
-    @stories = fetch_stories('votes_count >= 5')
+    @stories = Story.popular 
+  end
+
+  def bin
+    @stories = Story.upcoming
+    render action: "index"
   end
 
   def new
@@ -20,11 +25,6 @@ class StoriesController < ApplicationController
 
   def show
     @story = Story.find(params[:id])
-  end
-
-  def bin
-    @stories = fetch_stories("votes_count < 5")
-    render action: "index"
   end
 
   protected
