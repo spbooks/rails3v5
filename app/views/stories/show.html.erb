@@ -12,15 +12,28 @@
       collection: @story.votes.latest %>
   <% end %>
 </ul>
+<p>
+  <%= @story.description %>
+</p>
 <p class="submitted_by">
   Submitted by:
-  <span><%= @story.user.name %></span>
+  <span><%= link_to @story.user.name, @story.user %></span>
 </p>
 <p>
   <%= link_to @story.link, @story.link %>
 </p>
-<div id="vote_form">
-  <%= form_for [ @story, Vote.new ], remote: true do |f| %>
-    <%= f.submit 'Vote for it' %>
-  <% end %>
+<% if logged_in? %>
+  <div id="vote_form">
+    <%=form_for [@story, Vote.new], remote: true do %>
+      <%= submit_tag 'vote' %>
+    <% end %>
+  </div>
+<% else %>
+  <p>
+    <em>
+      You would be able to vote for this story if you were
+      <%= link_to 'logged in', new_session_path %>!
+    </em>
+  </p>
+<% end %>
 </div>

@@ -36,4 +36,25 @@ class StoryTest < ActiveSupport::TestCase
   test "is associated with a user"do
     assert_equal users(:glenn), stories(:one).user
   end
+
+  test "increments vote counter cache" do
+    stories(:two).votes.create(user: users(:glenn))
+    stories(:two).reload
+    assert_equal 1, stories(:two).attributes['votes_count']
+  end
+
+  test "decrements votes counter cache" do
+    stories(:one).votes.first.destroy
+    stories(:one).reload
+    assert_equal 1, stories(:one).attributes['votes_count']
+  end
+
+  test "casts vote after creating story" do
+    s = Story.create(
+      name: "Vote SmartThe 2008 Elections",
+      link: "http://votesmart.org/",
+      user: users(:glenn)
+    )
+    assert_equal users(:glenn), s.votes.first.user
+  end
 end
