@@ -20,5 +20,9 @@
     <p><%= f.label :description  %></p>
 	<%= f.text_area :description %>
   </div>
+  <p>
+    tags:<br />
+    <%= f.text_field :tag_list %>
+  </p>
   <%= submit_tag %>
 <% end %>

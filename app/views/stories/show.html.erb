@@ -22,6 +22,12 @@
 <p>
   <%= link_to @story.link, @story.link %>
 </p>
+<% unless @story.tag_list.empty? %>
+  <p class="tags">
+    <strong>Tags:</strong>
+    <%= render partial: "tags/tag", collection: @story.tags %>
+  </p>
+<% end %>
 <% if logged_in? %>
   <div id="vote_form">
     <%=form_for [@story, Vote.new], remote: true do %>

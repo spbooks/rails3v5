@@ -28,7 +28,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   test "gets new story form" do
     get_with_user new_story_path
     assert_response :success
-    assert_select 'form p', count: 3
+    assert_select 'form p', count: 4
   end
 
   test "adds a story" do
@@ -109,5 +109,23 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   test "story index is default" do
     assert_recognizes({ controller: "stories",
                         action: "index" }, "/")
+  end
+
+  test "add story with tags" do
+    post_with_user stories_path, params: {
+      story: {
+        name: "story with tags",
+        link: "http://www.story-with-tags.com/",
+        tag_list: "rails, blog"
+      }
+    }
+    assert_equal [ 'rails', 'blog' ], Story.last.tag_list
+  end
+
+  test "show story with tags" do
+    stories(:promoted).tag_list = 'apple, music'
+    stories(:promoted).save
+    get story_path(stories(:promoted))
+    assert_select 'p.tags a', 2
   end
 end
