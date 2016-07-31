@@ -12,6 +12,7 @@ class ActiveSupport::TestCase
     args_hash[:env] = {"rack.session" => {"user_id" =>  users(:glenn).id} }
     get action, args_hash
   end
+
   def post_with_user(action, args_hash = {})
     args_hash[:env] = {}
     args_hash[:env] = {"rack.session" => {"user_id" =>  users(:glenn).id} }
