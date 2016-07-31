@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   def current_user
     return unless session[:user_id]
     @current_user = User.where(id: session[:user_id]).first
+    Rails.logger.info "#{@current_user.name} requested #{request.fullpath} on #{Time.now}"
   end
 
   def ensure_login
