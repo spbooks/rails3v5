@@ -1,21 +1,18 @@
 require 'test_helper'
 
 class StoriesControllerTest < ActionDispatch::IntegrationTest
-  test "gets stories" do
-    get stories_path
-    assert_response :success
-    assert response.body.include?("A random link")
-  end
 
   test "gets new story form" do
-    get_with_user new_story_path
+    login_user
+    get new_story_path
     assert_response :success
     assert_select 'form div', count: 2
   end
 
   test "adds a story" do
+    login_user
     assert_difference 'Story.count' do
-      post_with_user stories_path, params: {
+      post stories_path, params: {
         story: {
           name: 'test story',
           link: 'http://www.test.com/'
@@ -27,11 +24,29 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "rejects when missing story attribute" do
+    login_user
     assert_no_difference 'Story.count' do
-      post_with_user stories_path, params: {
+      post stories_path, params: {
         story: { name: 'story without a link' }
       }
     end
+  end
+
+  test "indicates logged in user" do
+    login_user
+    get stories_path
+    assert_select 'div#login_logout em a', '(Logout)'
+  end
+
+  test "stores user with story" do
+    login_user
+    post stories_path, params: {
+      story: {
+        name: 'story with user',
+        link: 'http://www.story-with-user.com/'
+      }
+    }
+    assert_equal users(:glenn), Story.last.user
   end
 
   test "show story" do
@@ -47,10 +62,6 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'div#vote_form form'
   end
 
-  test "indicates logged in user" do
-    get_with_user stories_path
-    assert_select 'div#login_logout em a', '(Logout)'
-  end
 
   test "indicates not logged in" do
     get stories_path
@@ -73,13 +84,5 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'p.submitted_by span', 'Glenn Goodrich'
   end
 
-  test "stores user with story" do
-    post_with_user stories_path, params: {
-      story: {
-        name: 'story with user',
-        link: 'http://www.story-with-user.com/'
-      }
-    }
-    assert_equal users(:glenn), Story.last.user
-  end
 end
+
