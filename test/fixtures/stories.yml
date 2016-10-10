@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  link: MyString
+  name: My old weblog
+  link: http://ruprict.net/
+  user: glenn
 
 two:
-  name: MyString
-  link: MyString
+  name: SitePoint Forums
+  link: http://community.sitepoint.com
+  user: glenn

@@ -1,3 +1,36 @@
 // Place all the styles related to the Stories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$vote_color: #393;
+
+#vote_score {
+  float: right;
+  color: #9c9;
+}
+
+#vote_form {
+  margin: 10px 0;
+}
+
+#vote_form input {
+  padding: 3px 5px;
+  border: 3px solid $vote_color;
+  background-color: #cfc;
+  text-decoration: none;
+  color: $vote_color;
+}
+
+#vote_form input:hover {
+  background-color: #aea;
+}
+#vote_history {
+  padding: 5px;
+  margin: 0;
+  list-style: none;
+  border: 3px solid #ccc;
+  background-color: #eee;
+  float: right;
+  color: #999;
+  font-size: smaller;
+}

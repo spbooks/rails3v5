@@ -1,0 +1,26 @@
+<h2>
+  <span id="vote_score">
+    Score: <%= @story.votes.size %>
+</span>
+<%= @story.name %>
+</h2>
+<ul id="vote_history">
+  <% if @story.votes.empty? %>
+    <em>No votes yet!</em>
+  <% else %>
+    <%= render partial: 'votes/vote',
+      collection: @story.votes.latest %>
+  <% end %>
+</ul>
+<p class="submitted_by">
+  Submitted by:
+  <span><%= @story.user.name %></span>
+</p>
+<p>
+  <%= link_to @story.link, @story.link %>
+</p>
+<div id="vote_form">
+  <%= form_for [ @story, Vote.new ], remote: true do |f| %>
+    <%= f.submit 'Vote for it' %>
+  <% end %>
+</div>
