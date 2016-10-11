@@ -1,0 +1,71 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  background-color: #666;
+  margin: 15px 25px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+p { margin: 0 }
+input {
+  margin-bottom: 1em;
+}
+#content {
+  background-color: #fff;
+  border: 10px solid #ccc;
+  padding: 10px;
+  overflow: hidden; /* added */
+}
+* html #content { /* added */
+  height: 1%; /* added */
+} /* added */
+#notification {
+  border: 5px solid #9c9;
+  background-color: #cfc;
+  padding: 5px;
+  margin: 10px 0;
+}
+.field_with_errors {
+  color: red;
+  background: transparent;
+}
+.field_with_errors input {
+  border: thin solid red;
+}
+.form_errors {
+  color: red;
+}
+
+#login_logout {
+  float: right;
+  color: #999;
+  font-size: smaller;
+}
+
+#navigation {
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  text-align: center;
+}
+#navigation li {
+  display: inline;
+  padding: 0 5px;
+}
+#navigation li a {
+  color: #fff;
+}

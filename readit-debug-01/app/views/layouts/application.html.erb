@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Readit</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div id="content">
+      <div id="login_logout">
+        <% if @current_user %>
+          Logged in as:
+          <%= @current_user.name %>
+          <em><%= link_to "(Logout)", session_path,
+            method: :delete %></em>
+        <% else %>
+          <em>Not logged in.</em>
+          <%= link_to 'Login', new_session_path %>
+        <% end %>
+      </div>
+      <h1>Readit</h1>
+      <% unless flash[:notice].blank? %>
+        <div id="notification"><%= flash[:notice] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+    <ul id="navigation">
+      <li><%= link_to 'Front page stories', stories_path %></li>
+      <li><%= link_to 'Upcoming stories', bin_stories_path %></li>
+      <li><%= link_to 'Submit a new story!', new_story_path %></li>
+    </ul>
+  </body>
+</html>

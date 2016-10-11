@@ -1,0 +1,8 @@
+<div class='story'>
+  <h3><%= link_to story.name, story %></h3>
+  <p>
+    Submitted by: <%= story.user.name %> |
+    Score: <%= story.votes_count %>
+    Tags: <%= story.tag_list %>
+</p>
+</div>

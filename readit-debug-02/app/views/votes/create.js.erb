@@ -1,0 +1,8 @@
+$("#vote_score").html("Score: " + <%= @story.votes.size %>)
+$("#vote_score").css({backgroundColor: "#ffffcc"});
+
+$("#vote_history").html('<%= j( render partial: "votes/vote",
+                                       collection: @story.votes.latest )  %>')
+setTimeout(function(){
+  $("#vote_score").css({backgroundColor: "#ffffff"});
+}, 2000);
